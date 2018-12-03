@@ -1,0 +1,24 @@
+<resources>
+    <string name="app_name">Profile</string>
+    <string name="avatar_label">Select Avatar</string>
+    <string name="main_invalid_data">Invalid data</string>
+    <string name="main_save">Save</string>
+    <string name="main_saved_succesfully">Student saved successfully</string>
+    <string name="main_error_saving">Error saving student</string>
+    <string name="avatar_select">Select</string>
+    <string name="invalid_message">Invalid data</string>
+    <string name="main_name">Name</string>
+    <string name="main_hint_name">(name)</string>
+    <string name="main_email">Email</string>
+    <string name="main_hint_email">(email)</string>
+    <string name="main_hint_phone">(phone)</string>
+    <string name="main_hint_Adress">(address)</string>
+    <string name="main_hint_Web">(url)</string>
+    <string name="main_phoneNumber">Phone number</string>
+    <string name="main_adress">Address</string>
+    <string name="main_web">Web</string>
+    <string name="main_not_students_yet">Not profiles yet</string>
+    <string name="main_lblEdit">Edit</string>
+    <string name="main_lblDelete">Delete</string>
+    <string name="profile_label">Edit profile</string>
+</resources>
