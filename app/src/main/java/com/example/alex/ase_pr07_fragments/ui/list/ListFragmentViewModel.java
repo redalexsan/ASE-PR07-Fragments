@@ -25,12 +25,6 @@ public class ListFragmentViewModel extends ViewModel {
         data.deleteProflie(profile);
     }
 
-    public void addEditedProfile(User profile, int position){
-        data.addEditedProflie(profile,position);
-    }
 
-    public void addNewProfile(User profile){
-        data.addProflie(profile);
-    }
 
 }

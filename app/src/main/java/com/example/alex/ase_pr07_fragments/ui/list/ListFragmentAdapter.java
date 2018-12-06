@@ -21,10 +21,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public class ListFragmentAdapter extends ListAdapter<User,ListFragmentAdapter.ViewHolder> {
 
-    private final OnDeleteClickListener onDeleteClickListener;
-    private final OnEditClickListener onEditClickListener;
+    private OnDeleteClickListener onDeleteClickListener;
+    private OnEditClickListener onEditClickListener;
 
-    protected ListFragmentAdapter(@NonNull DiffUtil.ItemCallback<User> diffCallback, OnDeleteClickListener onDeleteClickListener, OnEditClickListener onEditClickListener) {
+    public ListFragmentAdapter() {
         super(new DiffUtil.ItemCallback<User>() {
             @Override
             public boolean areItemsTheSame(@NonNull User oldItem, @NonNull User newItem) {
@@ -37,7 +37,13 @@ public class ListFragmentAdapter extends ListAdapter<User,ListFragmentAdapter.Vi
                         Objects.equals(oldItem.getAvatar(),newItem.getAvatar());
             }
         });
+    }
+
+    public void setOnDeleteClickListener(OnDeleteClickListener onDeleteClickListener) {
         this.onDeleteClickListener = onDeleteClickListener;
+    }
+
+    public void setOnEditClickListener(OnEditClickListener onEditClickListener) {
         this.onEditClickListener = onEditClickListener;
     }
 

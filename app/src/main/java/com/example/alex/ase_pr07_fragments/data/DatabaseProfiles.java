@@ -53,8 +53,13 @@ public class DatabaseProfiles {
         updateProfilesLiveData();
     }
 
-    public void addEditedProflie(User profile, int position) {
-        profiles.set(position,profile);
+    public void addEditedProflie(User profile) {
+        for(int i=0; i<profiles.size();i++){
+            if(profile.getId() == profiles.get(i).getId()) {
+                profiles.set(i, profile);
+                break;
+            }
+        }
         updateProfilesLiveData();
     }
 }
