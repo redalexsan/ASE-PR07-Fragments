@@ -34,7 +34,6 @@ import com.example.alex.ase_pr07_fragments.ui.utils.NetworkUtils;
 import com.example.alex.ase_pr07_fragments.ui.utils.ValidationUtils;
 import com.google.android.material.snackbar.Snackbar;
 
-import java.util.Objects;
 
 public class ProfileFragment extends Fragment {
 
@@ -78,11 +77,11 @@ public class ProfileFragment extends Fragment {
         profileVM = ViewModelProviders.of(this).get(ProfileViewModel.class);
         mainVM = ViewModelProviders.of(requireActivity()).get(MainActivityViewModel.class);
         setUpActionBar();
-        isChangedAvatar();
-        initViews();
         user = getArguments().getParcelable(ARG_USER);
+        initViews();
         if (mainVM.isSaved())
             filldata();
+        isChangedAvatar();
     }
 
     private void filldata() {
@@ -97,15 +96,18 @@ public class ProfileFragment extends Fragment {
     }
 
     private void isChangedAvatar() {
-        if (user == null)
-            user = getArguments().getParcelable(ARG_USER);
         if (mainVM.isAvatarChanged()) {
             profileVM.setAvatar(mainVM.getAvatar().getValue());
-            user.setAvatar(mainVM.getAvatar().getValue());
+            b.lblAvatar.setText(profileVM.getAvatar().getName());
+            b.imgAvatar.setImageResource(profileVM.getAvatar().getImageResId());
+            mainVM.setAvatarChanged(false);
         }
     }
 
     private void initViews() {
+
+        b.lblAvatar.setText(user.getAvatar().getName());
+        b.imgAvatar.setImageResource(user.getAvatar().getImageResId());
 
         b.imgAvatar.setOnClickListener(v -> {
             mainVM.setOpenAvatar(true);
