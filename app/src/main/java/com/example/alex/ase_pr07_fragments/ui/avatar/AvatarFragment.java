@@ -59,12 +59,19 @@ public class AvatarFragment extends Fragment {
     }
 
     @Override
+    public void onDetach() {
+        mainVM.setOpenAvatar(false);
+        super.onDetach();
+    }
+
+    @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
         avatarVM = ViewModelProviders.of(this).get(AvatarFragmentViewModel.class);
         mainVM = ViewModelProviders.of(requireActivity()).get(MainActivityViewModel.class);
-        avatarVM.setAvatar(getArguments().getParcelable(ARG_AVATAR));
+        if(avatarVM.getAvatar() == null)
+            avatarVM.setAvatar(getArguments().getParcelable(ARG_AVATAR));
 
         setUpActionBar();
         initViews();
@@ -139,6 +146,7 @@ public class AvatarFragment extends Fragment {
         if (item.getItemId() == R.id.mnuSelect) {
             mainVM.setAvatar(avatarVM.getAvatar());
             mainVM.setOpenAvatar(false);
+            mainVM.setAvatarChanged(true);
             requireActivity().getSupportFragmentManager().popBackStack();
             return true;
         }

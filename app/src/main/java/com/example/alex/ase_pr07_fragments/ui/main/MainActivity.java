@@ -45,6 +45,7 @@ public class MainActivity extends AppCompatActivity {
         if (getSupportFragmentManager().findFragmentByTag(AvatarFragment.class.getSimpleName()) == null && mViewModel.isOpenAvatar())
             FragmentUtils.replaceFragmentAddToBackstack(getSupportFragmentManager(), R.id.flActivity, AvatarFragment.newInstance(avatar), AvatarFragment.class.getSimpleName(),
                     AvatarFragment.class.getSimpleName(), FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+        mViewModel.setAvatarChanged(false);
     }
 
     @Override

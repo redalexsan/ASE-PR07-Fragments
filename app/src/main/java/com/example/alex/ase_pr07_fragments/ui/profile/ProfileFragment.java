@@ -34,6 +34,8 @@ import com.example.alex.ase_pr07_fragments.ui.utils.NetworkUtils;
 import com.example.alex.ase_pr07_fragments.ui.utils.ValidationUtils;
 import com.google.android.material.snackbar.Snackbar;
 
+import java.util.Objects;
+
 public class ProfileFragment extends Fragment {
 
     private static final String ARG_USER = "ARG_USER";
@@ -44,10 +46,8 @@ public class ProfileFragment extends Fragment {
 
     public static ProfileFragment newInstance(User user) {
         ProfileFragment profileFragment = new ProfileFragment();
-
         Bundle bundle = new Bundle();
         bundle.putParcelable(ARG_USER, user);
-
         profileFragment.setArguments(bundle);
 
         return profileFragment;
@@ -78,6 +78,7 @@ public class ProfileFragment extends Fragment {
         profileVM = ViewModelProviders.of(this).get(ProfileViewModel.class);
         mainVM = ViewModelProviders.of(requireActivity()).get(MainActivityViewModel.class);
         setUpActionBar();
+        isChangedAvatar();
         initViews();
         user = getArguments().getParcelable(ARG_USER);
         if (mainVM.isSaved())
@@ -93,6 +94,15 @@ public class ProfileFragment extends Fragment {
         b.formProflie.txtEmail.setText(user.getMail());
         b.formProflie.txtPhonenumber.setText(String.valueOf(user.getPhoneNumer()));
         b.formProflie.txtWeb.setText(user.getWeb());
+    }
+
+    private void isChangedAvatar() {
+        if (user == null)
+            user = getArguments().getParcelable(ARG_USER);
+        if (mainVM.isAvatarChanged()) {
+            profileVM.setAvatar(mainVM.getAvatar().getValue());
+            user.setAvatar(mainVM.getAvatar().getValue());
+        }
     }
 
     private void initViews() {
@@ -293,10 +303,9 @@ public class ProfileFragment extends Fragment {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == R.id.mnuSelect) {
-            mainVM.setSaved(false);
+        if (item.getItemId() == R.id.mnuSave) {
             mainVM.setOpenProfile(false);
-            requireActivity().getSupportFragmentManager().popBackStack();
+            save();
             return true;
         }
         return super.onOptionsItemSelected(item);
@@ -307,12 +316,20 @@ public class ProfileFragment extends Fragment {
 
         if (validar()) {
             changeData();
-            if (mainVM.isSaved())
+            if (mainVM.isSaved()) {
                 profileVM.addEditedProfile(user);
-            else
+                mainVM.setSaved(false);
+            } else
                 profileVM.addNewProfile(user);
+            requireActivity().getSupportFragmentManager().popBackStack();
         } else
-            Snackbar.make(requireActivity().getCurrentFocus(), getString(R.string.main_error_saving), Snackbar.LENGTH_SHORT).show();
+            Snackbar.make(b.lblAvatar, getString(R.string.main_error_saving), Snackbar.LENGTH_SHORT).show();
 
+    }
+
+    @Override
+    public void onDetach() {
+        mainVM.setOpenProfile(false);
+        super.onDetach();
     }
 }

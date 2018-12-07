@@ -12,6 +12,7 @@ public class MainActivityViewModel extends ViewModel {
     private MutableLiveData<User> user = new MutableLiveData<>();
     private MutableLiveData<Avatar> avatar = new MutableLiveData<>();
     private boolean isSaved;
+    private boolean avatarChanged = false;
     private boolean openProfile = false;
     private boolean openAvatar = false;
 
@@ -53,5 +54,13 @@ public class MainActivityViewModel extends ViewModel {
 
     public void setOpenAvatar(boolean openAvatar) {
         this.openAvatar = openAvatar;
+    }
+
+    public boolean isAvatarChanged() {
+        return avatarChanged;
+    }
+
+    public void setAvatarChanged(boolean avatarChanged) {
+        this.avatarChanged = avatarChanged;
     }
 }
