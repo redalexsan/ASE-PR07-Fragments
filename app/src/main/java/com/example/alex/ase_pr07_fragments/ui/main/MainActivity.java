@@ -42,10 +42,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void openAvatarFragment(Avatar avatar) {
-        if (getSupportFragmentManager().findFragmentByTag(AvatarFragment.class.getSimpleName()) == null && mViewModel.isOpenAvatar())
+        if (getSupportFragmentManager().findFragmentByTag(AvatarFragment.class.getSimpleName()) == null && mViewModel.isOpenAvatar()) {
             FragmentUtils.replaceFragmentAddToBackstack(getSupportFragmentManager(), R.id.flActivity, AvatarFragment.newInstance(avatar), AvatarFragment.class.getSimpleName(),
                     AvatarFragment.class.getSimpleName(), FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
-        mViewModel.setAvatarChanged(false);
+            mViewModel.setAvatarChanged(false);
+
+        }
     }
 
     @Override

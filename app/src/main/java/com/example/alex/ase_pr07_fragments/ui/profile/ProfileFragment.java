@@ -100,7 +100,6 @@ public class ProfileFragment extends Fragment {
             profileVM.setAvatar(mainVM.getAvatar().getValue());
             b.lblAvatar.setText(profileVM.getAvatar().getName());
             b.imgAvatar.setImageResource(profileVM.getAvatar().getImageResId());
-            mainVM.setAvatarChanged(false);
         }
     }
 
